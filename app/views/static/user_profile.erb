@@ -1,0 +1,37 @@
+
+<h1>Profile Page</h1>
+<p>Glad to have you back <%= current_user.full_name.upcase%>!</p>
+
+<form id="out" action="/logout" method="post">
+	<input type="submit" value="Logout">
+</form>
+
+
+<!-- I want to see all the posts by other users. So I need to extract it from the database. -->
+<form id="user_create_post" action="/users/<%= current_user.id %>/post/new" method="get">
+	<input type="submit" value="Create a new post">
+</form>
+<!-- declare variable or not Ruby won't understand. -->
+
+
+<h1>Posts</h1>
+<% @all_user.each do |x| %>
+<h2><%= x.full_name.capitalize %></h2>
+<table>
+	<% x.posts.each do |p| %>
+	<tr>
+		<td><%= p.post_text %> 
+
+			<% if current_user.id == p.user_id %>
+			<form id="edit_post" action="/users/<%= current_user.id %>/post/<%= p.id %>/edit" method="get">
+				<input type="submit" value="Edit Posts">
+			</form>	
+
+			
+		</td>
+	</tr>
+	<%end%>	
+	<%end%>
+</table>
+<%end%>
+
