@@ -5,6 +5,7 @@ helpers do
     if session[:current_user_id]
       @current_user ||= User.find_by_id(session[:current_user_id])
     end
+    @current_user
   end
 
   def logged_in?

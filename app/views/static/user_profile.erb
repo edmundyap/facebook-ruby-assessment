@@ -7,7 +7,6 @@
 </form>
 
 
-<!-- I want to see all the posts by other users. So I need to extract it from the database. -->
 <form id="user_create_post" action="/users/<%= current_user.id %>/post/new" method="get">
 	<input type="submit" value="Create a new post">
 </form>
@@ -15,23 +14,25 @@
 
 
 <h1>Posts</h1>
+
 <% @all_user.each do |x| %>
 <h2><%= x.full_name.capitalize %></h2>
 <table>
 	<% x.posts.each do |p| %>
 	<tr>
-		<td><%= p.post_text %> 
-
-			<% if current_user.id == p.user_id %>
-			<form id="edit_post" action="/users/<%= current_user.id %>/post/<%= p.id %>/edit" method="get">
-				<input type="submit" value="Edit Posts">
-			</form>	
-
-			
+		<td>
+			<%= p.post_text %>
 		</td>
+
+		<td>
+			<form id="see_post" action="/users/<%= current_user.id %>/post/<%= p.id %>" method="get">
+				<input type="submit" value="See This Post">
+			</form>
+
+		</td>
+		<%end%>
 	</tr>
-	<%end%>	
-	<%end%>
+	
 </table>
 <%end%>
 

@@ -1,0 +1,25 @@
+<h2>All comments for this post</h2>
+<h2>Post</h2>
+<%= @post.post_text %>
+
+<table>
+	<h2>Comments</h2>
+	
+	<% @comments.all.each do |x| %>
+	<tr>
+		<td>
+			<%=x.comment_text%>	
+			<% if current_user.id == @post.user_id%>
+				<form id="delete_comment" action="/post/<%= @post.id %>/comment/<%=x.id%>/destroy" method="post">
+					<input type="submit" value="Delete Comment">
+				</form>
+
+				<form id="edit_comment" action="/post/<%= @post.id %>/comment/<%=x.id%>/edit" method="get">
+					<input type="submit" value="Edit Comment">
+				</form>	
+			<% end %>
+		</td>
+
+	</tr>
+	<%end%>
+</table>

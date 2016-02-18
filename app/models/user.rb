@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_secure_password
   #bcrypt defines .authenticate method behind the scene
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :full_name, presence: true
   validates_format_of :email, :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/

@@ -1,0 +1,29 @@
+<h2>Post</h2>
+
+<table>
+	
+	<tr>
+		<td>
+			<%= @show_post.post_text %>
+		</td>
+
+		<td>
+			<form id="comment_post" action="/post/<%= @show_post.id %>/comment/new" method="get">
+				<input type="submit" value="Create a comment">
+			</form>	
+			<form id="view_comment_post" action="/post/<%= @show_post.id %>/comment" method="get">
+				<input type="submit" value="View all comments">
+			</form>	
+			<% if current_user.id == @show_post.user_id%>
+			<form id="delete_post" action="/users/<%= current_user.id %>/post/<%= @show_post.id %>/destroy" method="post">
+				<input type="submit" value="Delete Post">
+			</form>	
+			<form id="edit_post" action="/users/<%= current_user.id %>/post/<%= @show_post.id %>/edit" method="get">
+				<input type="submit" value="Edit Posts">
+			</form>	
+			<%else%>
+			<%nil%>
+		</td>
+		<%end%>
+	</tr>
+</table>
